@@ -1,0 +1,159 @@
+<%- include('header') %>
+<div class="page-wrapper">
+  <div class="page-content">
+    <!--breadcrumb-->
+      <!--breadcrumb-->
+      <div id="toaster" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+           <div class="flex-fill ml-3">
+               <span id="toast-success"></span>
+           </div>
+       </div>
+   </div>
+   <div id="toasterError" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+           <div class="flex-fill ml-3">
+               <span id="toast-error"></span>
+           </div>
+       </div>
+   </div>
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+      <div class="breadcrumb-title pe-3">Add Question</div>
+      <div class="ps-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0 p-0">
+            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Add  Question</li>
+          </ol>
+        </nav>
+      </div>
+    
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+      <div class="col-xl-7 mx-auto">
+
+        <div class="card border-top border-0 border-4 border-primary">
+          <div class="card-body p-5">
+            <div class="card-title d-flex align-items-center">
+              <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+              </div>
+              <h5 class="mb-0 text-primary">Add  Question</h5>
+            </div>
+            <hr>
+            <form class="row g-3" method="post" action="/company/addquestion" id="addquestion">
+              
+              <div class="col-md-12">
+                <label for="inputFirstName" class="form-label">Select Category</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    <option value="" >Select Category</option>
+                    <%  data.forEach(function(records) { %>
+                        <option value="<%= records.id %>"><%= records.heading %></option>
+                    <%  }); %>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <label for="inputFirstName" class="form-label">Question</label>
+                <textarea id="question" name="question" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">Option A</label>
+                <input type="text" name="a" id="a" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">Option B</label>
+                <input type="text" name="b" id="b" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">Option C</label>
+                <input type="text" name="c" id="c" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">Option D</label>
+                <input type="text" name="d" id="d" class="form-control">
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary px-5">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include('footer') %>
+<script>
+
+    $(function() {
+
+        // Setup form validation on the #register-form element
+        $("#addquestion").validate({
+        
+            // Specify the validation rules
+            rules: {
+               
+                category_id: {
+                    required: true,
+                },
+                question: {
+                    required: true,
+                },
+                a: {
+                    required: true,
+                },
+                b: {
+                    required: true,
+                },
+                c: {
+                    required: true,
+                },
+                d: {
+                    required: true,
+                },
+            },
+            
+            // Specify the validation error messages
+            messages: {
+
+              category_id: "Category is required",
+              question: "Question is required",
+              a: "Option A is required",
+              b: "Option B is required",
+              c: "Option C is required",
+              d: "Option D is required",
+            },
+            
+            submitHandler: function(form){
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function(response) {
+                        //console.log(response)
+                        if(response == 'success'){
+                            window.location='/company/question'
+                            $("#toast-success").html("Successfully, question has been added");
+                            $("#toaster").fadeIn();
+
+                        }
+                        else if(response == 'error'){
+                          $("#toast-error").html('Something went worng !');
+                          $("#toasterError").fadeIn();
+                        }
+                        setTimeout(function() {
+                          $("#toaster").fadeOut();
+                          $("#toasterError").fadeOut();
+                        }, 3000);
+                    }            
+                });		
+            }
+           });
+    });
+     
+</script>

@@ -1,0 +1,278 @@
+
+<!doctype html>
+<html lang="en" class="color-sidebar sidebarcolor4 color-header headercolor2">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--favicon-->
+	<link rel="icon" href="/assets/images/favicon-32x32.png" type="image/png" />
+	<!--plugins-->
+	<link href="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
+	<link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="/assets/css/pace.min.css" rel="stylesheet" />
+	<script src="/assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	<link href="/assets/css/app.css" rel="stylesheet">
+	<link href="/assets/css/icons.css" rel="stylesheet">
+	<!-- Theme Style CSS -->
+	<link rel="stylesheet" href="/assets/css/dark-theme.css" />
+	<link rel="stylesheet" href="/assets/css/semi-dark.css" />
+	<link rel="stylesheet" href="/assets/css/header-colors.css" />
+	<title>Poll Desk</title>
+    <style>
+		.error {
+			color: red;
+		}
+	</style>
+</head>
+
+<body>
+	<!--wrapper-->
+	<div class="wrapper">
+		<!--sidebar wrapper -->
+		<div class="sidebar-wrapper" data-simplebar="true">
+			<div class="sidebar-header">
+				<div>
+					<img src="/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+				</div>
+				<div>
+					<h4 class="logo-text">Polldesk</h4>
+				</div>
+				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+				</div>
+			</div>
+			<!--navigation-->
+			<ul class="metismenu" id="menu">
+				<li>
+					<a href="/dashboard">
+						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						</div>
+						<div class="menu-title">Dashboard</div>
+					</a>
+				</li>
+				<li>
+					<a href="/company/category">
+						<div class="parent-icon"><i class="bx bx-support"></i>
+						</div>
+						<div class="menu-title">Category</div>
+					</a>
+				</li>
+				<!-- <li>
+					<a href="/company/question">
+						<div class="parent-icon"><i class="bx bx-support"></i>
+						</div>
+						<div class="menu-title">Question</div>
+					</a>
+				</li> -->
+			</ul>
+			<!--end navigation-->
+		</div>
+		<!--end sidebar wrapper -->
+		<!--start header -->
+		<header>
+			<div class="topbar d-flex align-items-center">
+				<nav class="navbar navbar-expand">
+					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
+					</div>
+					<div class="search-bar flex-grow-1">
+						
+					</div>
+					<div class="top-menu ms-auto">
+						<ul class="navbar-nav align-items-center">
+							
+						</ul>
+					</div>
+					<div class="user-box dropdown">
+						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="/assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+							<div class="user-info ps-3">
+								<p class="user-name mb-0">Pauline Seitz</p>
+								<p class="designattion mb-0">Web Designer</p>
+							</div>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+							</li>
+							
+							<li><a class="dropdown-item" href="/company/logout"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+<div class="page-wrapper">
+  <div class="page-content">
+		<!--breadcrumb-->
+		<div id="toaster" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+		  <div class="alert alert-success d-flex align-items-center" role="alert">
+			 <div class="flex-fill ml-3">
+				 <span id="toast-success"></span>
+			 </div>
+		 </div>
+	 </div>
+	 <div id="toasterError" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+		  <div class="alert alert-danger d-flex align-items-center" role="alert">
+			 <div class="flex-fill ml-3">
+				 <span id="toast-error"></span>
+			 </div>
+		 </div>
+	 </div>
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+      <div class="breadcrumb-title pe-3">Update Category</div>
+      <div class="ps-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0 p-0">
+            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Update  Category</li>
+          </ol>
+        </nav>
+      </div>
+    
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+      <div class="col-xl-7 mx-auto">
+
+        <div class="card border-top border-0 border-4 border-primary">
+          <div class="card-body p-5">
+            <div class="card-title d-flex align-items-center">
+              <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+              </div>
+              <h5 class="mb-0 text-primary">Update  Category</h5>
+            </div>
+            <hr>
+            <form class="row g-3" method="post" action="/company/updatecategory" id="updatecategory">
+               
+              <div class="col-md-12">
+                <label for="inputFirstName" class="form-label">Heading:</label>
+                <input type="text"  name="heading" id="heading" class="form-control"  value="<%= data.heading %>"><br>
+              </div>
+              <input type="hidden" id="id" name="id" value="<%= data.id %>">
+              <div class="col-md-12">
+                <label for="inputFirstName" class="form-label">Description:</label>
+                <textarea id="description" name="description" class="form-control"><%= data.description %></textarea>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">Start Date:</label>
+                <input type="datetime-local" name="start_date" id="start_date" min='<%= moment().format("YYYY-MM-DD[T]HH:mm:ss"); %>'  value='<%= moment(data.start_date).format("YYYY-MM-DD[T]HH:mm:ss"); %>' class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label for="inputFirstName" class="form-label">End Date:</label>
+                <input type="datetime-local" name="end_date" id="end_date" value='<%= moment(data.end_date).format("YYYY-MM-DD[T]HH:mm:ss"); %>' class="form-control">
+
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary px-5">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<footer class="page-footer">
+			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+		</footer>
+</div>
+	<!--end wrapper-->
+
+	<!-- Bootstrap JS -->
+	<script src="/assets/js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+	<script src="/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+	<script src="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="/assets/plugins/chartjs/js/Chart.min.js"></script>
+	<script src="/assets/plugins/chartjs/js/Chart.extension.js"></script>
+	<script src="/assets/js/index.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<!--app JS-->
+   
+	<script src="/assets/js/app.js"></script>
+</body>
+
+</html>
+
+
+<script>
+
+    $(function() {
+
+        // Setup form validation on the #register-form element
+        $("#updatecategory").validate({
+        
+            // Specify the validation rules
+            rules: {
+               
+                heading: {
+                    required: true,
+                },
+                description: {
+                    required: true,
+                    minlength: 5
+                },
+            },
+            
+            // Specify the validation error messages
+            messages: {
+
+                description: {
+                    required: "Please provide a description",
+                    minlength: "Your description must be at least 5 characters long"
+                },
+                heading: "Please enter a heading",
+            },
+            
+            submitHandler: function(form){
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function(response) {
+                        //console.log(response)
+                        if(response == 'success'){
+                            window.location='/company/category';
+							$("#toast-success").html("Successfully, category has been update");
+                            $("#toaster").fadeIn();
+                        }
+                        else if(response == 'error'){
+                          $("#toast-error").html('Something went worng !');
+                          $("#toasterError").fadeIn();
+                        }
+                        setTimeout(function() {
+                          $("#toaster").fadeOut();
+                          $("#toasterError").fadeOut();
+                        }, 3000);
+                    }            
+                });		
+            }
+           });
+    });
+     
+</script>

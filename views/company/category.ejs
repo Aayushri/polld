@@ -1,0 +1,130 @@
+
+<%- include('header') %>
+<div class="page-wrapper">
+  <div class="page-content">
+      <!--breadcrumb-->
+      <div id="toaster" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+           <div class="flex-fill ml-3">
+               <span id="toast-success"></span>
+           </div>
+       </div>
+   </div>
+   <div id="toasterError" style="border-radius: 8px;right: 10px; margin-top:55px;position: fixed; z-index: 999999999999999;font-size: 18px;color: #fff; display: none;">
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+           <div class="flex-fill ml-3">
+               <span id="toast-error"></span>
+           </div>
+       </div>
+   </div>
+      <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+          <div class="breadcrumb-title pe-3">Category</div>
+          <div class="ps-3">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb mb-0 p-0">
+                      <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">Category</li>
+                  </ol>
+              </nav>
+          </div>
+          <div class="ms-auto">
+              <div class="btn-group">
+                  <a href="/company/addcategory" class="btn btn-primary">Add</a>
+              </div>
+          </div>
+      </div>
+      
+      <h6 class="mb-0 text-uppercase">Category </h6>
+      <hr/>
+      <div class="card">
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table id="example2" class="table table-striped table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Sr.No.</th>
+                              <th>Heading</th>
+                              <th>Description</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Action</th>
+                              <th>Add Question</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <% i=1; data.forEach(function(records) { %> 
+                          <tr>
+                            <td><%= i %></td>
+                            <td><%= records.heading %></td>
+                            <td><%= records.description %></td>
+                            <td><%= moment(records.start_date).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+                            <td><%= moment(records.end_date).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+                            <td>
+                                <a href="/company/editcategory/<%= records.id %>" style="margin-right: 5px;">
+                                    <i class="lni lni-pencil-alt"></i>
+                                </a>
+                                <a>
+                                    <i class="lni lni-trash delete" id="<%= records.id %>"></i>
+                                </a>
+                                <a>
+                                    <i class="lni lni-empty-file" id="<%= records.id %>"></i>
+                                </a>
+                            </td>
+                            <td> 
+                                <a href="/company/question/<%= records.id %>" style="margin-right: 5px;">
+                                    <i class="lni lni-eye" ></i>
+                                </a>
+                            </td>
+                          </tr>
+                        <% i++; }); %>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<%- include('footer') %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    // function deletedata(id)
+    $(document).on('click', '.delete', function() 
+    {
+        var id = $(this).attr('id');
+        //alert(id);
+        swal({
+            title: "Are you sure want to delete this?",
+            //text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: '/company/deletecategory',
+                    method: "post",
+                    data: {id:id},
+                    success: function(response) {
+                        if(response == 'success'){
+                            location.reload();
+                        }
+                        else
+                        {
+                            swal({
+                                title: "Please try again",
+                                //text: "Once deleted, you will not be able to recover this imaginary file!",
+                                icon: "warning",
+                                // buttons: true,
+                                // dangerMode: true,
+                            })
+                        }
+                    }            
+                });
+            }
+        });
+
+    });
+</script>
